@@ -9,7 +9,7 @@ class SudokuBoard {
 		SudokuBoard(const char *file);
 
 	private:
-		`
+		
 };
 
 int main(int argc, char **argv) {
