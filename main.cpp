@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "board.hpp"
 
 using namespace std;
 
@@ -25,11 +26,12 @@ int main(int argc, char **argv) {
 	if (file.is_open()) {
 		while(!file.eof()) {
 			file >> output;
-			cout << output << endl;
 		}
 	}
 	file.close();
 	cout << "Output |" << output << "|" << endl;
+	Board board(output);
+	cout << "Board: \n" << board.print() << endl;
 
 	return 0;
 }

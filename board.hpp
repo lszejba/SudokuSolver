@@ -22,10 +22,11 @@ class HLane {
 class Board {
 	public:
 		std::string print();
-		Board(const char *file);
+		Board(const char *buffer);
 
 	private:
-		Field fields[81];
+		void setFields(const char *buffer);
+		Field *fields[81];
 
 };
 
