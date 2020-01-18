@@ -2,4 +2,4 @@
 - Board represents whole sudoku board. It consists of 81 (9x9) Fields, grouped into Groups (3x3 Fields).
 - Board contains 9 rows and 9 columns of Fields.
 - Board contains 3 vertical lanes (VLanes) and 3 horizontal lanes (HLanes), each containing 3 Groups.
-- While Board and Fields are "physical" objects, Groups, VLanes and HLanes are "logical" entities used validation and planning moves.
+- While Board and Fields are "physical" objects, Groups, VLanes and HLanes are "logical" entities used for validation and planning moves.
