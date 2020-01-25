@@ -8,11 +8,25 @@ Board::Board(const char *buffer) {
 
 std::string Board::print() {
     std::string res = "";
+    res += "+---+---+---+\n";
 	for (int i = 0; i < 9; i++) {
+        res += "|";
         for (int j = 0; j < 9; j++) {
-            res += fields[j + i * 9]->print();
+            res += m_fields[j + i * 9]->print();
+            if ((j + 1) % 3 == 0) {
+                res += "|";
+            }
         }
         res += '\n';
+        if ((i + 1) % 3 == 0) {
+            res += "+---+---+---+\n";
+        }
+    }
+
+    res += "\nFields:\n";
+
+    for (int i = 0; i < 81; i++) {
+        res += m_fields[i]->debugPrint();
     }
 
     return res;
@@ -23,7 +37,7 @@ void Board::setFields(const char *buffer) {
     while(buffer[i] != '\0') {
         if (buffer[i] != ';') {
             int val = (int)((char)buffer[i] - '0');
-            fields[count] = new Field(val);
+            m_fields[count] = new Field(val, count / 9, count % 9);
             count++;
         }
         i++;

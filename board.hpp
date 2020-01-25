@@ -26,7 +26,7 @@ class Board {
 
 	private:
 		void setFields(const char *buffer);
-		Field *fields[81];
+		Field *m_fields[81];
 
 };
 
