@@ -1,7 +1,7 @@
 #include <iostream>
 #include "field.hpp"
 
-Field::Field(int val, int x, int y) {
+Field::Field(int val, int x, int y) : m_x(x), m_y(y) {
     if (val > 0 && val <= 9) {
         m_isInitSet = true;
         m_value = val;
@@ -9,9 +9,6 @@ Field::Field(int val, int x, int y) {
 		m_isInitSet = false;
 		m_value = 0;
 	}
-
-	m_x = x;
-	m_y = y;
 
 	for (int i = 0; i < 9; i++) {
 		m_possibleValues[i] = !m_isInitSet;
@@ -30,7 +27,7 @@ void Field::addPossibleValue(int value) {
 }
 
 void Field::removePossibleValue(int value) {
-	if (m_isInitSet || value > 0) {
+	if (m_isInitSet || m_value > 0) {
 		return; // field's value is set from start
 	}
 	if (value < 1 || value > 9) {
@@ -66,4 +63,36 @@ int Field::getValue() {
 	}
 
 	return m_value;
+}
+
+void Field::setValue(int value) {
+	if (m_value > 0) {
+		return;
+	}
+	if (value < 1 || value > 9) {
+		return;
+	}
+
+	m_value = value;
+	clearPossibleValues();
+}
+
+void Field::trySettingValue() {
+	int count = 0, valueToSet = -1;
+	for (int i = 0; i < 9; i++) {
+		if (m_possibleValues[i]) {
+			count++;
+			valueToSet = i + 1;
+		}
+	}
+
+	if (count == 1) {
+		setValue(valueToSet);
+	}
+}
+
+void Field::clearPossibleValues() {
+	for (int i = 0; i < 9; i++) {
+		m_possibleValues[i] = false;
+	}
 }

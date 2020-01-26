@@ -1,9 +1,11 @@
 #include <iostream>
 #include "board.hpp"
 #include "field.hpp"
+#include "group.hpp"
 
 Board::Board(const char *buffer) {
     setFields(buffer);
+    setAllGroups();
 }
 
 std::string Board::print() {
@@ -42,4 +44,43 @@ void Board::setFields(const char *buffer) {
         }
         i++;
     }
+}
+
+void Board::setAllGroups() {
+    //rows
+    for (int i = 0; i < 9; i++) {
+        Group row;
+        for (int j = 0; j < 9; j++) {
+            row.addField(m_fields[i * 9 + j]);
+        }
+        m_rows.push_back(row);
+    }
+
+    //columns
+    for (int i = 0; i < 9; i++) {
+        Group column;
+        for (int j = 0; j < 9; j++) {
+            column.addField(m_fields[i + j * 9]);
+        }
+        m_columns.push_back(column);
+    }
+
+    //squares
+    // TODO
+}
+
+bool Board::refreshPossibleFields() {
+    for (auto it : m_rows) {
+        it.processGroup();
+    }
+    std::cout << "\n---\nAfter processing rows\n---\n";
+    std::cout << print() << std::endl;
+
+    for (auto it : m_columns) {
+        it.processGroup();
+    }
+    std::cout << "\n---\nAfter processing columns\n---\n";
+    std::cout << print() << std::endl;
+
+    return true;
 }

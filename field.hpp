@@ -11,11 +11,15 @@ class Field {
 		std::string print();
 		std::string debugPrint();
 		int getValue();
+		void setValue(int value);
+		void trySettingValue();
 	private:
+		void clearPossibleValues();
+
 		bool m_isInitSet;
 		int m_value;
-		int m_x;
-		int m_y;
+		const int m_x;
+		const int m_y;
 		bool m_possibleValues[9];
 };
 

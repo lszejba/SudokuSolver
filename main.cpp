@@ -4,15 +4,6 @@
 
 using namespace std;
 
-class SudokuBoard {
-	public:
-		void print();
-		SudokuBoard(const char *file);
-
-	private:
-		
-};
-
 int main(int argc, char **argv) {
 	if (argc <= 1) {
 		cout << "No filename provided" << endl;
@@ -32,6 +23,8 @@ int main(int argc, char **argv) {
 	cout << "Output |" << output << "|" << endl;
 	Board board(output);
 	cout << "Board: \n" << board.print() << endl;
+
+	board.refreshPossibleFields();
 
 	return 0;
 }

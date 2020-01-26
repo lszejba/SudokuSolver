@@ -2,11 +2,7 @@
 #define __BOARD_HPP__
 
 #include "field.hpp"
-
-class Group {
-	public:
-	private:
-};
+#include "group.hpp"
 
 class VLane {
 	public:
@@ -23,11 +19,16 @@ class Board {
 	public:
 		std::string print();
 		Board(const char *buffer);
+		bool refreshPossibleFields();
 
 	private:
 		void setFields(const char *buffer);
-		Field *m_fields[81];
+		void setAllGroups();
 
+		Field *m_fields[81];
+		std::vector<Group> m_rows;
+		std::vector<Group> m_columns;
+		std::vector<Group> m_squares;
 };
 
 #endif
