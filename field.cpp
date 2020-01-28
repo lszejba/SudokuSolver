@@ -57,6 +57,12 @@ std::string Field::debugPrint() {
 	return res;
 }
 
+std::string Field::debugPrintCoordinates() {
+	std::string res = "(" + std::to_string(m_x) + "," + std::to_string(m_y) + ")\n";
+
+	return res;
+}
+
 int Field::getValue() {
 	if (m_value <= 0) {
 		return 0;

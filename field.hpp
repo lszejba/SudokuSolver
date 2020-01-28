@@ -10,6 +10,7 @@ class Field {
 		void removePossibleValue(int value);
 		std::string print();
 		std::string debugPrint();
+		std::string debugPrintCoordinates();
 		int getValue();
 		void setValue(int value);
 		void trySettingValue();

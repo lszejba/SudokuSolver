@@ -24,7 +24,9 @@ int main(int argc, char **argv) {
 	Board board(output);
 	cout << "Board: \n" << board.print() << endl;
 
-	board.refreshPossibleFields();
+	for (int i = 0; i < 5; i++) {
+		board.refreshPossibleFields();
+	}
 
 	return 0;
 }
