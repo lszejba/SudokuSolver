@@ -4,8 +4,10 @@
 #include "group.hpp"
 
 Board::Board(const char *buffer) {
+    std::cout << "[LOG] Board init start" << std::endl;
     setFields(buffer);
     setAllGroups();
+    std::cout << "[LOG] Board init done" << std::endl;
 }
 
 std::string Board::print() {
@@ -39,7 +41,8 @@ void Board::setFields(const char *buffer) {
     while(buffer[i] != '\0') {
         if (buffer[i] != ';') {
             int val = (int)((char)buffer[i] - '0');
-            m_fields[count] = new Field(val, count / 9, count % 9);
+            m_fields[count] = new Field(/*val, */count / 9, count % 9);
+            m_fields[count]->setValue(val, true);
             count++;
         }
         i++;
@@ -49,7 +52,7 @@ void Board::setFields(const char *buffer) {
 void Board::setAllGroups() {
     //rows
     for (int i = 0; i < 9; i++) {
-        Group row;
+        Row row(i);
         for (int j = 0; j < 9; j++) {
             row.addField(m_fields[i * 9 + j]);
         }
@@ -58,7 +61,7 @@ void Board::setAllGroups() {
 
     //columns
     for (int i = 0; i < 9; i++) {
-        Group column;
+        Column column(i);
         for (int j = 0; j < 9; j++) {
             column.addField(m_fields[i + j * 9]);
         }
@@ -68,7 +71,7 @@ void Board::setAllGroups() {
     //squares
     for (int i1 = 0; i1 < 3; i1++) {
         for (int j1 = 0; j1 < 3; j1++) {
-            Group square;
+            Square square(i1 * 3 + j1);
 //            std::cout << "Group start" << std::endl;
             for (int i2 = 0; i2 < 3; i2++) {
                 for (int j2 = 0; j2 < 3; j2++) {
@@ -83,23 +86,24 @@ void Board::setAllGroups() {
 }
 
 bool Board::refreshPossibleFields() {
+    bool res = false;
     for (auto it : m_rows) {
-        it.processGroup();
+        res |= it.processGroup();
     }
-    std::cout << "\n---\nAfter processing rows\n---\n";
-    std::cout << print() << std::endl;
+//    std::cout << "\n---\nAfter processing rows\n---\n";
+//    std::cout << print() << std::endl;
 
     for (auto it : m_columns) {
-        it.processGroup();
+        res |= it.processGroup();
     }
-    std::cout << "\n---\nAfter processing columns\n---\n";
-    std::cout << print() << std::endl;
+//    std::cout << "\n---\nAfter processing columns\n---\n";
+//    std::cout << print() << std::endl;
 
     for (auto it : m_squares) {
-        it.processGroup();
+        res |= it.processGroup();
     }
-    std::cout << "\n---\nAfter processing squares\n---\n";
+//    std::cout << "\n---\nAfter processing squares\n---\n";
     std::cout << print() << std::endl;
 
-    return true;
+    return res;
 }

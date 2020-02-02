@@ -27,15 +27,20 @@ bool Group::processGroup() {
     }
 
     // remove used values from possibleValues and try setting value
+    bool anyChange = false;
     for (auto it : m_fields) {
         if (it->getValue() == 0) {
             for (auto it2 : usedValues) {
-                it->removePossibleValue(it2);
+                anyChange |= it->removePossibleValue(it2);
 //                std::cout << "removingPossibleValue for " << std::to_string(it2) << std::endl;
             }
         }
         it->trySettingValue();
     }
 
-    return true;
+    if (anyChange) {
+        std::cout << "[LOG] " << dbgName() << "(" + dbgIndex() << ") changed\n";
+    }
+
+    return anyChange;
 }

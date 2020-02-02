@@ -26,9 +26,9 @@ class Board {
 		void setAllGroups();
 
 		Field *m_fields[81];
-		std::vector<Group> m_rows;
-		std::vector<Group> m_columns;
-		std::vector<Group> m_squares;
+		std::vector<Row> m_rows;
+		std::vector<Column> m_columns;
+		std::vector<Square> m_squares;
 };
 
 #endif

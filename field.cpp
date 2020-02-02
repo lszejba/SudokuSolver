@@ -1,15 +1,7 @@
 #include <iostream>
 #include "field.hpp"
 
-Field::Field(int val, int x, int y) : m_x(x), m_y(y) {
-    if (val > 0 && val <= 9) {
-        m_isInitSet = true;
-        m_value = val;
-    } else {
-		m_isInitSet = false;
-		m_value = 0;
-	}
-
+Field::Field(int x, int y) : m_value(0), m_x(x), m_y(y) {
 	for (int i = 0; i < 9; i++) {
 		m_possibleValues[i] = !m_isInitSet;
 	}
@@ -26,15 +18,20 @@ void Field::addPossibleValue(int value) {
 	m_possibleValues[value - 1] = true;
 }
 
-void Field::removePossibleValue(int value) {
+/* Returns true if value has been removed from possibleValues, false otherwise */
+bool Field::removePossibleValue(int value) {
 	if (m_isInitSet || m_value > 0) {
-		return; // field's value is set from start
+		return false; // field's value is set from start
 	}
 	if (value < 1 || value > 9) {
 		std::cout << "[LOG] (removePossibleValue) - invalid value (" << value << ")" << std::endl;
-		return;
+		return false;
 	}
-	m_possibleValues[value - 1] = false;
+	if (m_possibleValues[value - 1]) {
+		m_possibleValues[value - 1] = false;
+		return true;
+	}
+	return false;
 }
 
 std::string Field::print() {
@@ -58,7 +55,7 @@ std::string Field::debugPrint() {
 }
 
 std::string Field::debugPrintCoordinates() {
-	std::string res = "(" + std::to_string(m_x) + "," + std::to_string(m_y) + ")\n";
+	std::string res = "(" + std::to_string(m_x) + "," + std::to_string(m_y) + ")";
 
 	return res;
 }
@@ -71,7 +68,7 @@ int Field::getValue() {
 	return m_value;
 }
 
-void Field::setValue(int value) {
+void Field::setValue(int value, bool isInit) {
 	if (m_value > 0) {
 		return;
 	}
@@ -80,6 +77,8 @@ void Field::setValue(int value) {
 	}
 
 	m_value = value;
+	m_isInitSet = isInit;
+	std::cout << "[LOG] Field " << this->debugPrintCoordinates() << " value set to " << m_value << std::endl;
 	clearPossibleValues();
 }
 

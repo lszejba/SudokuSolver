@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 	}
 	// read file
 	ifstream file;
-	cout << "Opening file " << argv[1] << endl;
+	cout << "[LOG] Opening file " << argv[1] << endl;
 	file.open(argv[1]);
 	char output[256];
 	if (file.is_open()) {
@@ -20,13 +20,20 @@ int main(int argc, char **argv) {
 		}
 	}
 	file.close();
-	cout << "Output |" << output << "|" << endl;
+	cout << "[LOG] Output |" << output << "|" << endl;
 	Board board(output);
-	cout << "Board: \n" << board.print() << endl;
+	cout << "[LOG] Board: \n" << board.print() << endl;
 
 	for (int i = 0; i < 5; i++) {
 		board.refreshPossibleFields();
 	}
+
+	int counter = 1;
+	do {
+		std::cout << "[LOG] Round " << counter++ << std::endl;
+	} while(board.refreshPossibleFields());
+
+	std::cout << "[LOG] Nothing more to do\n";
 
 	return 0;
 }

@@ -5,14 +5,14 @@
 
 class Field {
 	public:
-        Field(int value, int x, int y);
+        Field(int x, int y);
 		void addPossibleValue(int value);
-		void removePossibleValue(int value);
+		bool removePossibleValue(int value);
 		std::string print();
 		std::string debugPrint();
 		std::string debugPrintCoordinates();
 		int getValue();
-		void setValue(int value);
+		void setValue(int value, bool isInit = false);
 		void trySettingValue();
 	private:
 		void clearPossibleValues();
