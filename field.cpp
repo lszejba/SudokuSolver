@@ -1,7 +1,7 @@
 #include <iostream>
 #include "field.hpp"
 
-Field::Field(int x, int y) : m_value(0), m_x(x), m_y(y) {
+Field::Field(int x, int y) : m_isInitSet(false), m_value(0), m_x(x), m_y(y) {
 	for (int i = 0; i < 9; i++) {
 		m_possibleValues[i] = !m_isInitSet;
 	}
@@ -43,7 +43,7 @@ std::string Field::print() {
 }
 
 std::string Field::debugPrint() {
-	std::string res = "Field [" + std::to_string(m_x) + "," + std::to_string(m_y) + "] value: " + std::to_string(m_value) + "\n";
+	std::string res = "Field " + debugPrintCoordinates() + " value: " + std::to_string(m_value) + "\n";
 	res += "\tPossible values: ";
 	for (int i = 0; i < 9; i++) {
 		if (m_possibleValues[i]) {

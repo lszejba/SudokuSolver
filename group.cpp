@@ -9,6 +9,7 @@ void Group::addField(Field *field) {
         return;
     }
 
+//    std::cout << dbgName() << " " << dbgIndex() << " - field added: " << field->debugPrint() << std::endl;
     m_fields.push_back(field);
 }
 
@@ -20,7 +21,7 @@ bool Group::processGroup() {
     // get all values used in this group
     std::vector<int> usedValues;
     for (auto it : m_fields) {
-        if (it->getValue() != 0) {
+        if (it->getValue() > 0) {
             usedValues.push_back(it->getValue());
 //            std::cout << "usedValues added " << std::to_string(it->getValue()) << std::endl;
         }

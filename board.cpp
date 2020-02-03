@@ -28,7 +28,7 @@ std::string Board::print() {
     }
 
 //    res += "\nFields:\n";
-//
+
 //    for (int i = 0; i < 81; i++) {
 //        res += m_fields[i]->debugPrint();
 //    }
