@@ -9,6 +9,7 @@ class Group {
         Group(int index) : m_index(index) {}
         void addField(Field *field);
         bool processGroup();
+        Field * getField(int index);
 
     protected:
         virtual std::string dbgName() = 0;

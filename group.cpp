@@ -13,6 +13,16 @@ void Group::addField(Field *field) {
     m_fields.push_back(field);
 }
 
+Field * Group::getField(int index) {
+    if (index < 0 || index >= 9) {
+        return NULL;
+    }
+    if (m_fields.size() < index + 1) {
+        return NULL;
+    }
+    return m_fields[index];
+}
+
 bool Group::processGroup() {
     if (m_fields.size() != 9) {
         return false;

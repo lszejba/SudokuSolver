@@ -8,6 +8,7 @@ class Field {
         Field(int x, int y);
 		void addPossibleValue(int value);
 		bool removePossibleValue(int value);
+		bool isValuePossible(int value);
 		std::string print();
 		std::string debugPrint();
 		std::string debugPrintCoordinates();

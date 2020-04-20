@@ -34,6 +34,13 @@ bool Field::removePossibleValue(int value) {
 	return false;
 }
 
+bool Field::isValuePossible(int value) {
+	if (m_value > 0) {
+		return false;
+	}
+	return m_possibleValues[value];
+}
+
 std::string Field::print() {
 	if (m_value <= 0) {
 		return std::string(" ");

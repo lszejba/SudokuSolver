@@ -3,6 +3,7 @@
 
 #include "field.hpp"
 #include "group.hpp"
+#include "logicallane.hpp"
 
 class VLane {
 	public:
@@ -29,6 +30,8 @@ class Board {
 		std::vector<Row> m_rows;
 		std::vector<Column> m_columns;
 		std::vector<Square> m_squares;
+		std::vector<LogicalRow> m_logicalRows;
+		std::vector<LogicalColumn> m_logicalColumns;
 };
 
 #endif
