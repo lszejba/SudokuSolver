@@ -16,8 +16,8 @@ class LogicalLane {
         std::string dbgIndex() { return std::to_string(m_index); }
 
     private:
-        void removePossibleFromOtherSquares(int num, int groupIdx, int ownerIdx);
-        void checkSquare(int idx, int number);
+        bool removePossibleFromOtherSquares(int num, int groupIdx, int ownerIdx);
+        bool checkSquare(int idx, int number);
         std::vector<Group *> m_groups;
         int m_index;
 };

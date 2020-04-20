@@ -8,8 +8,6 @@ void Group::addField(Field *field) {
     if (m_fields.size() == 9) {
         return;
     }
-
-//    std::cout << dbgName() << " " << dbgIndex() << " - field added: " << field->debugPrint() << std::endl;
     m_fields.push_back(field);
 }
 
@@ -33,7 +31,6 @@ bool Group::processGroup() {
     for (auto it : m_fields) {
         if (it->getValue() > 0) {
             usedValues.push_back(it->getValue());
-//            std::cout << "usedValues added " << std::to_string(it->getValue()) << std::endl;
         }
     }
 
@@ -43,14 +40,9 @@ bool Group::processGroup() {
         if (it->getValue() == 0) {
             for (auto it2 : usedValues) {
                 anyChange |= it->removePossibleValue(it2);
-//                std::cout << "removingPossibleValue for " << std::to_string(it2) << std::endl;
             }
         }
         it->trySettingValue();
-    }
-
-    if (anyChange) {
-        std::cout << "[LOG] " << dbgName() << "(" + dbgIndex() << ") changed\n";
     }
 
     return anyChange;

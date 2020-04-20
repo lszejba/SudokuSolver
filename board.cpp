@@ -15,7 +15,6 @@ Board::Board(const char *buffer) {
 std::string Board::print() {
     std::string res = "";
     res += "+---+---+---+\n";
-    std::cout << res;
 	for (int i = 0; i < 9; i++) {
         res += "|";
         for (int j = 0; j < 9; j++) {
@@ -25,36 +24,21 @@ std::string Board::print() {
             }
         }
         res += '\n';
-        std::cout << res;
         if ((i + 1) % 3 == 0) {
             res += "+---+---+---+\n";
         }
-        std::cout << res;
     }
-
-//    res += "\nFields:\n";
-
-//    for (int i = 0; i < 81; i++) {
-//        res += m_fields[i]->debugPrint();
-//    }
 
     return res;
 }
 
 void Board::setFields(const char *buffer) {
-    std::cout << "setFields()" << std::endl;
-    if (buffer == NULL) {
-        std::cout << "Buffer is NULL\n";
-    } else {
-        std::cout << "buffer: |" << buffer << "|" << std::endl;
-    }
     int i = 0, count = 0;;
     while(buffer[i] != '\0') {
         if (buffer[i] != ';') {
             int val = (int)((char)buffer[i] - '0');
-            m_fields[count] = new Field(/*val, */count / 9, count % 9);
+            m_fields[count] = new Field(count / 9, count % 9);
             m_fields[count]->setValue(val, true);
-            std::cout << "field added: " << std::to_string(val) << " (" << std::to_string(count) << ")\n";
             count++;
         }
         i++;
@@ -101,14 +85,11 @@ void Board::setAllGroups() {
     for (int i1 = 0; i1 < 3; i1++) {
         for (int j1 = 0; j1 < 3; j1++) {
             Square square(i1 * 3 + j1);
-//            std::cout << "Group start" << std::endl;
             for (int i2 = 0; i2 < 3; i2++) {
                 for (int j2 = 0; j2 < 3; j2++) {
- //                   std::cout << "\t" << m_fields[i1 *3 + i2 + 9 * (j1 * 3+ j2)]->debugPrintCoordinates();
                     square.addField(m_fields[i1 * 3 + i2 + 9 * (j1 * 3+ j2)]);
                 }
             }
-//            std::cout << "Group end" << std::endl;
             m_squares.push_back(square);
         }
     }
@@ -119,19 +100,14 @@ bool Board::refreshPossibleFields() {
     for (auto it : m_rows) {
         res |= it.processGroup();
     }
-//    std::cout << "\n---\nAfter processing rows\n---\n";
-//    std::cout << print() << std::endl;
 
     for (auto it : m_columns) {
         res |= it.processGroup();
     }
-//    std::cout << "\n---\nAfter processing columns\n---\n";
-//    std::cout << print() << std::endl;
 
     for (auto it : m_squares) {
         res |= it.processGroup();
     }
-//    std::cout << "\n---\nAfter processing squares\n---\n";
 
     for (auto it : m_logicalRows) {
         res |= it.processLane();
@@ -140,7 +116,6 @@ bool Board::refreshPossibleFields() {
     for (auto it : m_logicalColumns) {
         res |= it.processLane();
     }
-    std::cout << print() << std::endl;
 
     return res;
 }

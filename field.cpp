@@ -12,7 +12,7 @@ void Field::addPossibleValue(int value) {
 		return;
 	}
 	if (value < 1 || value > 9) {
-		std::cout << "[LOG] (addPossibleValue) - invalid value (" << value << ")" << std::endl;
+//		std::cout << "[LOG] (addPossibleValue) - invalid value (" << value << ")" << std::endl;
 		return;
 	}
 	m_possibleValues[value - 1] = true;
@@ -24,7 +24,7 @@ bool Field::removePossibleValue(int value) {
 		return false; // field's value is set from start
 	}
 	if (value < 1 || value > 9) {
-		std::cout << "[LOG] (removePossibleValue) - invalid value (" << value << ")" << std::endl;
+//		std::cout << "[LOG] (removePossibleValue) - invalid value (" << value << ")" << std::endl;
 		return false;
 	}
 	if (m_possibleValues[value - 1]) {
@@ -85,7 +85,7 @@ void Field::setValue(int value, bool isInit) {
 
 	m_value = value;
 	m_isInitSet = isInit;
-	std::cout << "[LOG] Field " << this->debugPrintCoordinates() << " value set to " << m_value << std::endl;
+//	std::cout << "[LOG] Field " << this->debugPrintCoordinates() << " value set to " << m_value << std::endl;
 	clearPossibleValues();
 }
 

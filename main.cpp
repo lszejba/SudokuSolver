@@ -28,16 +28,15 @@ int main(int argc, char **argv) {
 	Board board(output1);
 	cout << "[LOG] Board: \n" << board.print() << endl;
 
-	for (int i = 0; i < 5; i++) {
-		board.refreshPossibleFields();
+	bool continueWork = true;
+	int rounds = 0;
+	while(continueWork) {
+		continueWork = board.refreshPossibleFields();
+		rounds++;
 	}
 
-	int counter = 1;
-	do {
-		std::cout << "[LOG] Round " << counter++ << std::endl;
-	} while(board.refreshPossibleFields());
-
-	std::cout << "[LOG] Nothing more to do\n";
+	std::cout << board.print() << std::endl;
+	std::cout << "\nDone in " + std::to_string(rounds) << " rounds\n";
 
 	return 0;
 }
