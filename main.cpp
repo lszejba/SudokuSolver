@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
 		cout << "No filename provided" << endl;
 		return -1;
 	}
-	// read file
+	
 	ifstream file;
 	cout << "[LOG] Opening file " << argv[1] << endl;
 	file.open(argv[1]);
@@ -32,18 +32,12 @@ int main(int argc, char **argv) {
 	int rounds = 0;
 	while(continueWork) {
 		continueWork = (ObjectManager::getInstance()).signalAllObjects();
-//		continueWork = board.refreshPossibleFields();
-//		if (!continueWork) {
-//			board.refreshPossibleFields();
-//		}
 		std::cout << board.print() << std::endl;
 		rounds++;
 	}
 
 	std::cout << board.print() << std::endl;
 	std::cout << "\nDone in " + std::to_string(rounds) << " rounds\n";
-
-//	std::cout << board.dbgPrint() << std::endl;
 
 	return 0;
 }

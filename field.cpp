@@ -2,9 +2,9 @@
 #include "field.hpp"
 #include "group.hpp"
 
-Field::Field(int x, int y) : /*m_isInitSet(false),*/ m_value(0), m_x(x), m_y(y) {
+Field::Field(int x, int y) : m_value(0), m_x(x), m_y(y) {
 	for (int i = 0; i < 9; i++) {
-		m_possibleValues[i] = true;//!m_isInitSet;
+		m_possibleValues[i] = true;
 	}
 }
 
@@ -14,7 +14,6 @@ void Field::removePossibleValue(int value) {
 		return; // field's value is set from start
 	}
 	if (value < 1 || value > 9) {
-//		std::cout << "[LOG] (removePossibleValue) - invalid value (" << value << ")" << std::endl;
 		return;
 	}
 	if (m_possibleValues[value - 1]) {
@@ -110,12 +109,6 @@ void Field::trySettingValue(int value) {
 		setValue(valueToSet);
 	}
 }
-
-//void Field::addOwner(void *owner) {
-//	if (owner != NULL) {
-//		m_owners.push_back(owner);
-//	}
-//}
 
 void Field::clearPossibleValues() {
 	for (int i = 0; i < 9; i++) {

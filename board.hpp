@@ -5,17 +5,6 @@
 #include "group.hpp"
 #include "logicallane.hpp"
 
-// class VLane {
-// 	public:
-// 	private:
-
-// };
-
-// class HLane {
-// 	public:
-// 	private:
-// };
-
 class Board {
 	public:
 		std::string print();

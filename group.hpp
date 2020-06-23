@@ -8,9 +8,7 @@ class Group : public Object {
     public:
         Group(int index) : m_index(index) {}
         void addField(Field *field);
-//        bool processGroup();
         Field * getField(int index);
-//        void performOwnerFunction();
         void performCleanup();
         void performSetting();
         std::string printObject();

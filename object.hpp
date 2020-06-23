@@ -10,7 +10,6 @@ class Object {
         void signalOwners();
         virtual void performCleanup() {}
         virtual void performSetting() {}
-//        virtual void performOwnerFunction() {}
         virtual std::string printObject() { return ""; }
         bool ownersSetToChange();
     private:
@@ -27,8 +26,7 @@ class ObjectManager {
         bool isObjectSetToChange(Object *obj);
     private:
         ObjectManager() {}
-
-//        static ObjectManager *m_instance;
+        
         bool m_isProcessed;
         std::vector<Object *> m_objects;
         std::vector<Object *> m_nextObjects;

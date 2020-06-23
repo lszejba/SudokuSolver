@@ -12,7 +12,6 @@ void LogicalLane::addGroup(Group *group) {
 }
 
 void LogicalLane::removePossibleFromOtherSquares(int number, int groupIdx, int ownerIdx) {
-//    bool result = false;
     for (int i = 0; i < 3; i++) {
         if (i == ownerIdx) {
             continue;
@@ -22,7 +21,6 @@ void LogicalLane::removePossibleFromOtherSquares(int number, int groupIdx, int o
         }
     }
 
-//    return result;
 }
 
 void LogicalLane::checkSquare(int idx, int number) {
@@ -30,25 +28,22 @@ void LogicalLane::checkSquare(int idx, int number) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (m_groups[i]->getField(idx * 3 + j)->getValue() == number) {
-                return;// false;
+                return;
             }
             if (m_groups[i]->getField(idx * 3 + j)->isValuePossible(number)) {
                 if (index == -1) {
                     index = i;
                 } else if (index != i) {
-                    return;// false;
+                    return;
                 }
             }
         }
     }
-
-//    bool result = false;
+    
     if (index != -1) {
         std::cout << "### Remove from other squares(" + std::to_string(number) + ", " << std::to_string(index) + ", " << std::to_string(idx) << ")" << std::endl;
         removePossibleFromOtherSquares(number, index, idx);
     }
-
-//    return result;
 }
 
 void LogicalLane::processLane() {

@@ -17,7 +17,6 @@ void Object::addOwner(Object *owner) {
 void Object::signalOwners() {
     for (auto it : m_owners) {
         ObjectManager::getInstance().addObject(it);
-//        std::cout << "&&& Object " << printObject() << " added owner " << it->printObject() << std::endl;
     }
 }
 
@@ -35,15 +34,9 @@ bool Object::ownersSetToChange() {
 ObjectManager& ObjectManager::getInstance() {
     static ObjectManager instance;
     return instance;
-//    if (ObjectManager::m_instance == NULL) {
-//        ObjectManager::m_instance = new ObjectManager();
-//    }
-
-//    return ObjectManager::m_instance;
 }
 
 void ObjectManager::addObject(Object *object) {
-//    std::cout << "... addObject" << std::endl;
     if (object == NULL) {
         return;
     }
@@ -54,7 +47,6 @@ void ObjectManager::addObject(Object *object) {
                 return;
             }
         }
-//        std::cout << "... ... nextObjects" << std::endl;
         m_nextObjects.push_back(object);
     } else {
         for (auto it : m_objects) {
@@ -62,22 +54,17 @@ void ObjectManager::addObject(Object *object) {
                 return;
             }
         }
-//        std::cout << "... ... objects" << std::endl;
         m_objects.push_back(object);
     }
 }
 
 bool ObjectManager::signalAllObjects() {
-//    std::cout << "... signalAllObjects()" << std::endl;
     if (m_objects.empty()) {
         return false;
     }
-//    std::cout << "... ... size(" << std::to_string(m_objects.size()) << ")" << std::endl;
     m_isProcessed = true;
     std::cout << "&&& cleanup phase" << std::endl;
     for (auto it : m_objects) {
-//        std::cout << "... performOwnerFunction" << std::endl;
-//        std::cout << "... ..." << &it << std::endl;
         it->performCleanup();
     }
     for (auto it : m_objects) {

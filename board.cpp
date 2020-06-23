@@ -49,8 +49,7 @@ void Board::setFields(const char *buffer) {
     while(buffer[i] != '\0') {
         if (buffer[i] != ';') {
             int val = (int)((char)buffer[i] - '0');
-//            m_fields[count] = new Field(count / 9, count % 9);
-            m_fields[count]->setValue(val/*, true*/);
+            m_fields[count]->setValue(val);
             count++;
         }
         i++;
@@ -111,27 +110,6 @@ void Board::setAllGroups() {
 }
 
 void Board::refreshPossibleFields() {
-/*    for (auto it : m_rows) {
-        res |= it->processGroup();
-        if (res) {
-            return true;
-        }
-    }
-
-    for (auto it : m_columns) {
-        res |= it->processGroup();
-        if (res) {
-            return true;
-        }
-    }
-
-    for (auto it : m_squares) {
-        res |= it->processGroup();
-        if (res) {
-            return true;
-        }
-    } */
-
     for (auto it : m_logicalRows) {
         it->processLane();
     }
