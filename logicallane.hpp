@@ -9,15 +9,15 @@ class LogicalLane {
     public:
         LogicalLane(int index) : m_index(index) {}
         void addGroup(Group *group);
-        bool processLane();
+        void processLane();
 
     protected:
         virtual std::string dbgName() = 0;
         std::string dbgIndex() { return std::to_string(m_index); }
 
     private:
-        bool removePossibleFromOtherSquares(int num, int groupIdx, int ownerIdx);
-        bool checkSquare(int idx, int number);
+        void removePossibleFromOtherSquares(int num, int groupIdx, int ownerIdx);
+        void checkSquare(int idx, int number);
         std::vector<Group *> m_groups;
         int m_index;
 };

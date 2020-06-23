@@ -5,13 +5,15 @@ CPPFLAGS=-g $(shell root-config --cflags) -Wall
 LDFLAGS=-g $(shell root-config --ldflags)
 LDLIBS=$(shell root-config --libs)
 
-SRCS=field.cpp group.cpp logicallane.cpp board.cpp main.cpp
+SRCS=object.cpp field.cpp group.cpp logicallane.cpp board.cpp main.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
 
 all: solver
 
 solver: $(OBJS)
 	$(CXX) $(LDFLAGS) -o solver $(OBJS) $(LDLIBS)
+
+object.o: object.cpp object.hpp
 
 field.o: field.cpp field.hpp
 

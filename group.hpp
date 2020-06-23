@@ -4,12 +4,16 @@
 #include "field.hpp"
 #include <vector>
 
-class Group {
+class Group : public Object {
     public:
         Group(int index) : m_index(index) {}
         void addField(Field *field);
-        bool processGroup();
+//        bool processGroup();
         Field * getField(int index);
+//        void performOwnerFunction();
+        void performCleanup();
+        void performSetting();
+        std::string printObject();
 
     protected:
         virtual std::string dbgName() = 0;

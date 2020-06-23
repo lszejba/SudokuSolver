@@ -31,12 +31,19 @@ int main(int argc, char **argv) {
 	bool continueWork = true;
 	int rounds = 0;
 	while(continueWork) {
-		continueWork = board.refreshPossibleFields();
+		continueWork = (ObjectManager::getInstance()).signalAllObjects();
+//		continueWork = board.refreshPossibleFields();
+//		if (!continueWork) {
+//			board.refreshPossibleFields();
+//		}
+		std::cout << board.print() << std::endl;
 		rounds++;
 	}
 
 	std::cout << board.print() << std::endl;
 	std::cout << "\nDone in " + std::to_string(rounds) << " rounds\n";
+
+//	std::cout << board.dbgPrint() << std::endl;
 
 	return 0;
 }
